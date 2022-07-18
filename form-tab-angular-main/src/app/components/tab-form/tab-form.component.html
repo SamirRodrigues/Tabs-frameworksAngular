@@ -1,0 +1,54 @@
+
+<div>
+    <h2>Tabs Form</h2>
+    <form #tabsForm = "ngForm" (ngSubmit)="sendTabsValue()">
+        <label for="numTabs">Num.Tabs</label>
+        <input type="number" id="numTabs" name="numTabs" #numTabs="ngModel" [(ngModel)]="inputTabsToAdd"/>
+        <hr />
+
+        <div *ngIf="inputTabsToAdd && inputTabsToAdd > 0; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>
+            <div *ngFor="let array of Arr(inputTabsToAdd);index as i">
+                {{editArray(i)}}
+                <div>
+                    <label for="{{'name'+i}}">Titulo</label>
+                    <input type="text"
+                           id="{{'name'+i}}"
+                           name="{{'name'+i}}"
+                           required
+                           #name="ngModel"
+                           [(ngModel)]="tabs[i].name" />
+
+
+                    <small *ngIf=" !name.valid && name.touched">
+                        <br>O nome não é válido<br>
+                    </small>
+
+                    <label for="{{'text'+i}}">Conteudo</label>
+                    <textarea
+                            id="{{'text'+i}}"
+                            name="{{'text'+i}}"
+                            #text="ngModel"
+                            [(ngModel)]="tabs[i].text"
+                            required
+                            ></textarea>
+                    <small *ngIf=" !text.valid && text.touched">
+                        <br>O texto não é válido<br>
+                    </small>
+                </div>
+            </div>
+
+            <input type="submit" value="Send" class="btn btn-success" [disabled]="tabsForm.invalid"/>
+            <ng-template [ngIf]="tabsForm.invalid">
+                <div>
+                    <p>Para salvar as tabs você deve preencher todos os campos .</p>
+                </div>
+            </ng-template>
+
+        </ng-template>
+            <ng-template #elseBlock>
+            <p>Deve haver pelo menos uma Tab</p>
+        </ng-template>
+
+    </form>
+</div>

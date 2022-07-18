@@ -1,0 +1,9 @@
+<div>
+    <h1>Tabs</h1>
+    <app-tab-form
+            (SendThisTab)="saveTabs($event)"></app-tab-form>
+    <br/>
+    <hr />
+    <app-tab-container
+            [tabs] = tabs></app-tab-container>
+</div>

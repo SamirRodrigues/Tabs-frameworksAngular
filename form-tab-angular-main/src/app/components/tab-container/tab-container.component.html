@@ -1,0 +1,21 @@
+<div>
+    <h2>Tabs</h2>
+    <ng-container *ngFor="let tab of tabs;index as i">
+        <app-tab
+                [index]="i"
+                [tabName]= "tab.name"
+                [tabText]="tab.text"
+                (SendThisTab)="setCurrentTabText($event)"></app-tab>
+    </ng-container>
+    <div *ngIf="tabs && tabs[index] ; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+        <p>{{tabs[index].text}}</p>
+    </ng-template>
+    <ng-template #elseBlock>
+        <p>Ainda sem Tabs</p>
+    </ng-template>
+
+
+</div>
+
+
